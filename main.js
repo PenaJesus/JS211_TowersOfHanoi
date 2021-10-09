@@ -23,6 +23,7 @@ let stacks = {
 };
 
 // Start here. What is this function doing?
+// this is logging our 3 seperate stacks in our "stacks" object
 const printStacks = () => {
   console.log("a: " + stacks.a);
   console.log("b: " + stacks.b);
@@ -30,25 +31,78 @@ const printStacks = () => {
 }
 
 // Next, what do you think this function should do?
-const movePiece = () => {
+//  This function should allow us to move the individual pieces
+const movePiece = (startStack,endStack) => { 
+  if (isLegal(startStack,endStack) === true) {
+   let topItem = stacks[startStack].pop();
+   console.log(topItem)
+   stacks[endStack].push(topItem);
+
+  }
+  
+
   // Your code here
 
 }
 
 // Before you move, should you check if the move it actually allowed? Should 3 be able to be stacked on 2
-const isLegal = () => {
+// This should check if the move we are trying to make is legal. the larger stack can not be stacked on top of a smaller one
+const isLegal = (startStack,endStack) => {
+  const lastIndex = (stacks[startStack].length -1)
+  console.log('lastindex', lastIndex)
+  const startArray = stacks[startStack]
+  console.log('startArray', startArray)
+  const start = startArray[lastIndex]
+  console.log('starting', start)
+  const lastEnd = (stacks[endStack].length -1)
+  console.log('endindex', lastEnd)
+  const endArray = stacks[endStack]
+  console.log('endArray', endArray)
+  const end = endArray[lastEnd]
+  console.log('startingEnd', end)
+  
+  if (start < end ) {
+    console.log('is legal move');
+    return true
+  } 
+  else if (start > end ) {
+    console.log('cannot be larger that previous piece');
+   return false 
+  
+  }
+  else if (end === undefined) {
+    console.log('is a legal move');
+    return true
+  }
+  else if (start === undefined) {
+    console.log('nothing to move')
+    return false 
+    
+  }
   // Your code here
 
 }
 
 // What is a win in Towers of Hanoi? When should this function run?
-const checkForWin = () => {
+// this function should run when the final stack follow the '4,3,2,1' order
+const checkForWin = (startStack,endStack) => {
+  if (stacks.c.length === 4 || stacks.b.length === 4) {
+  console.log('player has won');  
+  return true 
+} 
+else if (stacks.b.length !== 4 || stacks.c.length !== 4) {
+
+  return false
+}
   // Your code here
 
 }
 
 // When is this function called? What should it do with its argument?
 const towersOfHanoi = (startStack, endStack) => {
+  movePiece(startStack, endStack);
+  
+  checkForWin(startStack,endStack)
   // Your code here
 
 }
