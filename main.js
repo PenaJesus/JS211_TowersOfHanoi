@@ -66,7 +66,7 @@ const isLegal = (startStack,endStack) => {
     return true
   } 
   else if (start > end ) {
-    console.log('cannot be larger that previous piece');
+    console.log('cannot be larger than previous piece');
    return false 
   
   }
